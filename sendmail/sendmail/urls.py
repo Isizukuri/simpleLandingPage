@@ -16,12 +16,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from django.views.generic.base import View
 
-from simpleapp.views import send_mail
+from simpleapp.views import MainPage, send_mail
 
 urlpatterns = [
-	url(r'^$', View.as_view(), name='home'),
-	url(r'^send_email/', send_mail),
+    url(r'^$', MainPage.as_view(), name='home'),
+    url(r'^send_email/', send_mail, name='send_mail'),
     url(r'^admin/', admin.site.urls),
 ]
