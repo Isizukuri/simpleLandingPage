@@ -60,3 +60,6 @@ target/
 
 # DB
 *.sqlite3
+
+# Configuration
+sendmail/email_config.py
