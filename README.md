@@ -17,4 +17,4 @@ After it you need to install requirements for project:
 
 To start the project you need to run Django development server:
 
-python manage.py runserver
+```python manage.py runserver```
