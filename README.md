@@ -12,6 +12,7 @@ After it you need to install requirements for project:
 
 ```pip install -r requirements```
 
+To make send_email function properly, you must ask for SMTP server configuration and make changes to settings.py
 
 # Quickstart
 
