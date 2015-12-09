@@ -1,10 +1,10 @@
-from django.test import SimpleTestCase, Client
+from django.test import TestCase, Client
 from django.core import mail
 from django.core.urlresolvers import reverse
 # Create your tests here.
 
 
-class TestSendMailView(SimpleTestCase):
+class TestSendMailView(TestCase):
 
 
     def setUp(self):
