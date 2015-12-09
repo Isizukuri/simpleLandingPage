@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import email_config as cfg
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -123,10 +124,10 @@ STATIC_URL = '/static/'
 
 # email settings
 # please, set here you smtp server details and your admin email
-ADMIN_EMAIL = 'ragnarok49@gmail.com'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = '465'
-EMAIL_HOST_USER = 'ragnarok49@gmail.com'
-EMAIL_HOST_PASSWORD = 'pass'
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+ADMIN_EMAIL = cfg.destination_email
+EMAIL_HOST = cfg.smtp_name
+EMAIL_PORT = cfg.smtp_port
+EMAIL_HOST_USER = cfg.smtp_user
+EMAIL_HOST_PASSWORD = cfg.smtp_pass
+EMAIL_USE_TLS = cfg.use_tls
+EMAIL_USE_SSL = cfg.use_ssl
