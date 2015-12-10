@@ -1,0 +1,22 @@
+{
+  "name": "sendmail",
+  "homepage": "https://github.com/Isizukuri/simpleLandingPage",
+  "authors": [
+    "Isizukuri <ragnarok49@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "commercial",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}

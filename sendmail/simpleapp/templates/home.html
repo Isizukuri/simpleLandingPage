@@ -1,13 +1,22 @@
+{% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang=uk>
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+	
 </head>
 <body>
 	<form action="send_email/" method="post">{% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Submit" />
-</form>
+    	<input type="submit" value="Submit" />
+	</form>
+
+	<!-- JS Inclusion -->
+	<script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
+	<script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
 </body>
 </html>
