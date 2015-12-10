@@ -1,3 +1,5 @@
+import json
+
 from django.views.generic.base import TemplateView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
@@ -14,20 +16,14 @@ class MainPage(TemplateView):
     template_name = 'home.html'
     
     def post(self, request):
-        form = request.POST
-        message = u''
-        for value in form.values():
-            message += (value + u' ')
-        sm('test message', message, 'test@mail.com', [ADMIN_EMAIL])
+        form = json.loads(request.body)
+        sm('test message', unicode(form), 'test@mail.com', [ADMIN_EMAIL])
         return HttpResponseRedirect(reverse('home'))
 
 def send_mail(request):
     if request.method == 'POST':
-        form = request.POST
-        message = u''
-        for value in form.values():
-            message += (value + u' ')
-        sm('test message', message, 'test@mail.com', [ADMIN_EMAIL])
+        form = json.loads(request.body)
+        sm('test message', unicode(form), 'test@mail.com', [ADMIN_EMAIL])
         return HttpResponseRedirect(reverse('home'))
     else:
         return HttpResponse('<p>Incorrect method</p>')

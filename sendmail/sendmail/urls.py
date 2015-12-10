@@ -21,10 +21,6 @@ from simpleapp.views import MainPage, send_mail
 
 urlpatterns = [
     url(r'^$', MainPage.as_view(), name='home'),
-    url(r'^send_email/', send_mail, name='send_mail'),
+    url(r'^api/feedback/', send_mail, name='send_mail'),
     url(r'^admin/', admin.site.urls),
 ]
-
-urlpatterns += patterns('',
-    url(r'^captcha/', include('captcha.urls')),
-)
