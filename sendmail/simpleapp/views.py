@@ -1,4 +1,4 @@
-from django.views.generic.edit import FormView
+from django.views.generic.base import TemplateView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail as sm
@@ -10,10 +10,9 @@ from simpleapp.forms import ContactForm
 # Create your views here.
 
 
-class MainPage(FormView):
+class MainPage(TemplateView):
     template_name = 'home.html'
-    form_class = ContactForm
-
+    
     def post(self, request):
         form = request.POST
         message = u''
