@@ -10,26 +10,26 @@
 
 </head>
 <body ng-app="LRLandingPage">
-<div class='container'>
+<div class='container' ng-controller="LRContactFormController">
     <h3>Contact us</h3>
 
     <form name="lrContactForm" action="send_email/" method="post" novalidate>
         {% csrf_token %}
         <div class="form-group">
             <label for="InputName">Full name</label>
-            <input type="text" class="form-control" id="InputName" placeholder="Full name" name='name'>
+            <input type="text" class="form-control" id="InputName" placeholder="Full name" name='name' ng-model="name">
         </div>
         <div class="form-group">
             <label for="InputCategory">Category</label>
-            <input type="text" class="form-control" id="InputCategory" placeholder="Category" name='category'>
+            <input type="text" class="form-control" id="InputCategory" placeholder="Category" name='category' ng-model="category">
         </div>
         <div class="form-group">
             <label for="InputSubject">Subject</label>
-            <input type="text" class="form-control" id="InputSubject" placeholder="Subject" name='subject'>
+            <input type="text" class="form-control" id="InputSubject" placeholder="Subject" name='subject' ng-model="subject">
         </div>
         <div class="form-group">
             <label for="InputMessage">Message</label>
-            <textarea class="form-control" id='InputMessage' rows="3" name='message'></textarea>
+            <textarea class="form-control" id='InputMessage' rows="3" name='message' ng-model="message"></textarea>
         </div>
         <div class="form-group">
             <div re-captcha ng-model="user.captcha"></div>
