@@ -36,6 +36,10 @@ To install bower:
 
 ```npm install -g bower```
 
+Finally, you have to install static dependencies with bower:
+
+```bower install```
+
 To make send_email function properly, you must copy  email_config_sample.py from project directory (sendmail) to root directory and configure it for your SMTP server and account.
 # Quickstart
 
