@@ -1,14 +1,4 @@
-var app = angular.module('LRLandingPage', ['reCAPTCHA'])
-
-app.config(function(reCAPTCHAProvider) {
-    // required: please use your own key :)
-    reCAPTCHAProvider.setPublicKey('6LeSyhITAAAAAO0NUAXOGJhFCl0F9l1oHXE8CmNk');
-
-    // optional: gets passed into the Recaptcha.create call
-    reCAPTCHAProvider.setOptions({
-        theme: 'clean'
-    });
-})
+var app = angular.module('LRLandingPage', ['vcRecaptcha']);
 
 app.config(function($httpProvider) {
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';

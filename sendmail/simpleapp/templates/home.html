@@ -12,7 +12,8 @@
 <body ng-app="LRLandingPage">
 <div class='container' ng-controller="LRContactFormController">
     <h3>Contact us</h3>
-
+    {% verbatim %}
+    {% endverbatim %}
     <form name="lrContactForm" ng-submit="submit(feedback)" novalidate>
         {% csrf_token %}
         <div class="form-group" ng-class="{'has-success': lrContactForm.name.$valid, 'has-error': lrContactForm.name.$invalid && lrContactForm.name.$touched}">
@@ -35,9 +36,7 @@
             <textarea class="form-control" id='InputMessage' rows="3" name='message' ng-model="feedback.message" required></textarea>
             <span ng-show="lrContactForm.message.$invalid && lrContactForm.message.$touched" class="help-block">This field cannot be blank!</span>
         </div>
-        <div class="form-group">
-            <div re-captcha ng-model="feedback.captcha"></div>
-        </div>
+        <div vc-recaptcha key="'6Lek2xITAAAAAEywiCSzm6aCSuo6-yd21NJhj3km'"></div>
         <button type="submit" class="btn btn-default" ng-disabled="lrContactForm.$invalid">Submit</button>
     </form>
 </div>
@@ -45,7 +44,11 @@
 <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
 <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
 <script src="{% static "bower_components/angular/angular.min.js" %}"></script>
-<script src="{% static "bower_components/angular-re-captcha/angular-re-captcha.js" %}"></script>
+<script
+  src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit"
+  async defer
+></script>
+<script type="text/javascript" src="{% static "bower_components/angular-recaptcha/release/angular-recaptcha.min.js" %}"></script>
 
 <!-- AngularJS App-->
 <script src="{% static "js/app.js" %}"></script>

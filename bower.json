@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "bootstrap": "~3.3.6",
-    "angular-re-captcha": "~0.2.0"
+    "angular": "~1.4.8",
+    "angular-recaptcha": "~2.2.5"
   }
 }
