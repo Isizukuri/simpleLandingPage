@@ -8,8 +8,6 @@ from django.core.mail import send_mail as sm
 
 from sendmail.settings import ADMIN_EMAIL
 
-from simpleapp.forms import ContactForm
-
 # Create your views here.
 
 
