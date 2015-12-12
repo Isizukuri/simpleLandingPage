@@ -3,7 +3,6 @@ import requests
 
 from django.views.generic.base import TemplateView
 from django.http import JsonResponse
-from django.core.urlresolvers import reverse
 from django.core.mail import send_mail as sm
 
 from sendmail.settings import ADMIN_EMAIL
@@ -13,11 +12,6 @@ from sendmail.settings import ADMIN_EMAIL
 
 class MainPage(TemplateView):
     template_name = 'home.html'
-
-    def post(self, request):
-        form = json.loads(request.body)
-        sm('test message', unicode(form), 'test@mail.com', [ADMIN_EMAIL])
-        return HttpResponseRedirect(reverse('home'))
 
 
 def send_mail(request):
@@ -43,9 +37,8 @@ def send_mail(request):
         verify_rs = verify_rs.json()
         response = {}
         response["status"] = verify_rs.get("success", False)
-        response['message'] = verify_rs.get(
-            'error-codes', None) or "Unspecified error."
         if response['status']:
             sm('test message', unicode(form), 'test@mail.com', [ADMIN_EMAIL])
+        else:
+            response['message'] = verify_rs.get('error-codes', None)
         return JsonResponse(response)
-        

@@ -3,8 +3,25 @@ app.controller('LRContactFormController', ['$scope', '$http', 'vcRecaptchaServic
     $scope.submit = function(parameters) {
         parameters['g-recaptcha-response'] = vcRecaptchaService.getResponse();
         $http.post('api/feedback/', parameters)
+            .success(function(response) {
+                if (response['status']) {
+                    console.log('Form success.');
+                    $scope.status_message = 'Form successfully submited.';
+
+                } else {
+                    console.log('Server error detected.');
+                    $scope.status_message = response['message'];
+                };
+            })
+            .error(function(response) {
+                console.log('Client error detected.');
+                $scope.status_message = 'Got error while sending form to server.';
+            });
+            
+        /* Правильно було б вписати наступне у результати виконання запиту, 
+        але я щось туплю з областями видимості і в мене не виходить=( */
         this.feedback = {};
         grecaptcha.reset();
-        $scope.lrContactForm.$setUntouched()
+        $scope.lrContactForm.$setUntouched();
     };
 }]);
