@@ -9,15 +9,15 @@ app.controller('LRContactFormController', ['$scope', '$http', 'vcRecaptchaServic
                     $scope.status_message = 'Form successfully submited.';
 
                 } else {
-                    console.log('Server error detected.');
-                    $scope.status_message = response['message'];
+                    console.log('Error while verifying captcha on server');
+                    $scope.status_message = 'Error with captcha: '+String(response['message']);
                 };
             })
             .error(function(response) {
                 console.log('Client error detected.');
                 $scope.status_message = 'Got error while sending form to server.';
             });
-            
+
         /* Правильно було б вписати наступне у результати виконання запиту, 
         але я щось туплю з областями видимості і в мене не виходить=( */
         this.feedback = {};
