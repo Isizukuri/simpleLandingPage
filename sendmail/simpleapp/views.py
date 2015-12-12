@@ -38,7 +38,13 @@ def send_mail(request):
         response = {}
         response["status"] = verify_rs.get("success", False)
         if response['status']:
-            sm('test message', unicode(form), 'test@mail.com', [ADMIN_EMAIL])
+            name = 'Full name: ' + form.get('name') + '\n'
+            category = 'Category: ' + form.get('category') + '\n'
+            subject = 'Subject: ' + form.get('subject') + '\n'
+            text = 'Text: ' + form.get('message') + '\n'
+            message = name + category + subject + text
+            sm('Feedback from ' + form.get('name'), message, 'test@mail.com',
+                [ADMIN_EMAIL])
         else:
             response['message'] = verify_rs.get('error-codes', None)
         return JsonResponse(response)
