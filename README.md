@@ -2,9 +2,9 @@
 
 You need to install virtualenv and then activate it:
 
-```pip install virtualenv --no-site-packages```
+```pip install virtualenv```
 
-```virtualenv env```
+```virtualenv env --no-site-packages```
 
 ```source env/bin/activate```
 
