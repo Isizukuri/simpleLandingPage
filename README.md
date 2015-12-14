@@ -2,9 +2,9 @@
 
 You need to install virtualenv and then activate it:
 
-```pip install virtualenv --no-site-packages```
+```pip install virtualenv```
 
-```virtualenv env```
+```virtualenv env --no-site-packages```
 
 ```source env/bin/activate```
 
@@ -41,6 +41,6 @@ To make send_email function properly, you must copy  email_config_sample.py from
 
 To start the project you need to create tables in DB and then run Django development server:
 
-```python manage.py migrate```
+```cd sendmail```
 
 ```python manage.py runserver```
