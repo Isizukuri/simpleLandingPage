@@ -16,25 +16,22 @@ class MainPage(TemplateView):
 
 
 class SendMail(TemplateView):
-
-    def post(self, request):
-
-        def get_client_ip(request):
-            x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-            if x_forwarded_for:
-                ip = x_forwarded_for.split(',')[0]
-            else:
-                ip = request.META.get('REMOTE_ADDR')
-            return ip
-
-        if request.method == 'POST':
-            form = json.loads(request.body)
+    def get_client_ip(self):
+        x_forwarded_for = self.request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = self.request.META.get('REMOTE_ADDR')
+        return ip
+    def post(self, *args, **kwargs):
+        if self.request.method == 'POST':
+            form = json.loads(self.request.body)
             captcha_rs = form.get('g-recaptcha-response')
             url = "https://www.google.com/recaptcha/api/siteverify"
             params = {
                 'secret': u'6Lek2xITAAAAAEWo-jsppfNgdRFEzqIztP9EnHVd',
                 'response': unicode(captcha_rs),
-                'remoteip': get_client_ip(request)
+                'remoteip': self.get_client_ip()
             }
             verify_rs = requests.get(url, params=params, verify=True)
             verify_rs = verify_rs.json()
@@ -49,7 +46,6 @@ class SendMail(TemplateView):
                 sm('Feedback from ' + form.get('name'),
                     message, 'test@mail.com',
                     [ADMIN_EMAIL])
-
                 data = {'name': form.get('name'),
                         'category': form.get('category'),
                         'subject': form.get('subject'),
