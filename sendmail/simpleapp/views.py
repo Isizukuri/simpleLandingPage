@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.core.mail import send_mail as sm
 
 from sendmail.settings import ADMIN_EMAIL
+from models import Feedback
 
 # Create your views here.
 
@@ -45,6 +46,15 @@ def send_mail(request):
             message = name + category + subject + text
             sm('Feedback from ' + form.get('name'), message, 'test@mail.com',
                 [ADMIN_EMAIL])
+
+            data = {'name': form.get('name'),
+                    'category': form.get('category'),
+                    'subject': form.get('subject'),
+                    'text': form.get('message')
+                    }
+            feedback = Feedback(**data)
+            feedback.save()
+            print Feedback.objects.all()
         else:
             response['message'] = verify_rs.get('error-codes', None)
         return JsonResponse(response)

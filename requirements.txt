@@ -1,4 +1,4 @@
-Django==1.9
+Django==1.8.7
 argparse==1.2.1
 astroid==1.4.1
 lazy-object-proxy==1.2.1
