@@ -15,7 +15,7 @@
     {% verbatim %}
     {{ status_message }}
     {% endverbatim %}
-    <form name="lrContactForm" ng-submit="submit(feedback)" novalidate>
+    <form name="lrContactForm" ng-submit="submit(feedback)" ng-hide='form_hide' novalidate>
         {% csrf_token %}
         <div class="form-group" ng-class="{'has-success': lrContactForm.name.$valid, 'has-error': lrContactForm.name.$invalid && lrContactForm.name.$touched}">
             <label for="InputName">Full name</label>

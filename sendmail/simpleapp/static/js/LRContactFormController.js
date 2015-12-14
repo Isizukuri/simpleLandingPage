@@ -1,18 +1,14 @@
 app.controller('LRContactFormController', ['$scope', '$http', 'vcRecaptchaService', function($scope, $http, vcRecaptchaService) {
-    this.feedback = {};
     $scope.submit = function(parameters) {
         parameters['g-recaptcha-response'] = vcRecaptchaService.getResponse();
         $http.post('api/feedback/', parameters)
             .success(function(response) {
                 if (response['status']) {
                     console.log('Form success.');
-                    $scope.lrContactForm.$setPristine();
-                    $scope.lrContactForm.$setUntouched();
-                    
+                    $scope.form_hide = true;
                     $scope.status_message = 'Form successfully submited.';
                 } else {
-                    console.log('Error while verifying captcha on server');
-                    
+                    console.log('Error while verifying captcha on server');                    
                     $scope.status_message = 'Error with captcha: '+String(response['message']);
                 };
             })
