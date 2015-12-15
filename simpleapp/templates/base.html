@@ -11,10 +11,42 @@
 </head>
 <body ng-app="LRLandingPage">
 <div class='container' ng-controller="LRContactFormController">
-    <h3>Contact us</h3>
-    {% verbatim %}
-    {{ status_message }}
-    {% endverbatim %}
+    
+    <!-- Start Header -->
+    <div class="row" id="header"> 
+      <div class="col-xs-10">
+        <h1>Header</h1>
+      </div>
+
+
+      {% if user.is_authenticated %}
+      <!-- User's toolbar for authenticated users -->
+      <div class="col-xs-2" id="user-toolbar">
+        <a href="{% url "profile" %}">{{ user.get_full_name|default:user.username }}</a> |
+        <a href="{% url "users:auth_logout" %}">Logout</a>
+      </div>
+
+      {% else %}
+
+      <!-- User's toolbar for anonymous users -->
+      <div class="col-xs-2" id="user-toolbar">
+        <a href="{% url "users:auth_login" %}">Login</a> |
+        <a href="{% url "users:registration_register" %}">Register</a>
+      </div>
+      {% endif %}
+
+    </div>
+    <!-- End Header -->
+ 
+    {% block title %}<h3>Contact us</h3>{% endblock title %}
+
+    {% block status_message %}
+      {% verbatim %}
+        {{ status_message }}
+      {% endverbatim %}
+    {% endblock %}
+    
+    {% block content %}    
     <form name="lrContactForm" ng-submit="submit(feedback)" ng-hide='form_hide' novalidate>
         {% csrf_token %}
         <div class="form-group" ng-class="{'has-success': lrContactForm.name.$valid, 'has-error': lrContactForm.name.$invalid && lrContactForm.name.$touched}">
@@ -38,9 +70,11 @@
             <span ng-show="lrContactForm.message.$invalid && lrContactForm.message.$touched" class="help-block">This field cannot be blank!</span>
         </div>
         <div vc-recaptcha key="'6Lek2xITAAAAAEywiCSzm6aCSuo6-yd21NJhj3km'"></div>
-        <button type="submit" class="btn btn-default" ng-disabled="lrContactForm.$invalid">Submit</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="lrContactForm.$invalid">Submit</button>
     </form>
 </div>
+    {% endblock content %}
+
 <!-- JS Inclusion -->
 <script src="{% static "jquery/jquery.min.js" %}"></script>
 <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>

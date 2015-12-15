@@ -2,9 +2,11 @@
 *.DS_Store
 /.bash_history
 /.bashrc
-/.env
 *.sqlite3
 *.db
 *.mo
 web/*
 logs/*.log
+venv/*
+!\.d
+

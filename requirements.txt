@@ -6,3 +6,4 @@ requests==2.8.1
 six==1.10.0
 wrapt==1.10.6
 wsgiref==0.1.2
+django-registration-redux==1.2

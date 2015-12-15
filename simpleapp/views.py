@@ -5,6 +5,8 @@ from django.views.generic.base import TemplateView
 from django.http import JsonResponse
 from django.core.mail import send_mail as sm
 
+from registration.forms import RegistrationFormUniqueEmail
+
 from sendmail.settings import ADMIN_EMAIL
 from models import Feedback
 
@@ -12,7 +14,7 @@ from models import Feedback
 
 
 class MainPage(TemplateView):
-    template_name = 'home.html'
+    template_name = 'base.html'
 
 
 class SendMail(TemplateView):
@@ -23,6 +25,7 @@ class SendMail(TemplateView):
         else:
             ip = self.request.META.get('REMOTE_ADDR')
         return ip
+
     def post(self, *args, **kwargs):
         if self.request.method == 'POST':
             form = json.loads(self.request.body)
@@ -56,3 +59,7 @@ class SendMail(TemplateView):
             else:
                 response['message'] = verify_rs.get('error-codes', None)
             return JsonResponse(response)
+
+
+class Registration(RegistrationFormUniqueEmail):
+    pass
