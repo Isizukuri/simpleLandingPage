@@ -1,58 +1,18 @@
-import json
-import requests
-
-from django.views.generic.base import TemplateView
-from django.http import JsonResponse
-from django.core.mail import send_mail as sm
+from django.views.generic.edit import FormView
+from django.core.mail import send_mail
 
 from sendmail.settings import ADMIN_EMAIL
-from models import Feedback
+from simpleapp.forms import FeedbackForm
 
 # Create your views here.
 
 
-class MainPage(TemplateView):
+class MainPage(FormView):
     template_name = 'home.html'
+    form_class = FeedbackForm
 
-
-class SendMail(TemplateView):
-    def get_client_ip(self):
-        x_forwarded_for = self.request.META.get('HTTP_X_FORWARDED_FOR')
-        if x_forwarded_for:
-            ip = x_forwarded_for.split(',')[0]
-        else:
-            ip = self.request.META.get('REMOTE_ADDR')
-        return ip
-    def post(self, *args, **kwargs):
-        if self.request.method == 'POST':
-            form = json.loads(self.request.body)
-            captcha_rs = form.get('g-recaptcha-response')
-            url = "https://www.google.com/recaptcha/api/siteverify"
-            params = {
-                'secret': u'6Lek2xITAAAAAEWo-jsppfNgdRFEzqIztP9EnHVd',
-                'response': unicode(captcha_rs),
-                'remoteip': self.get_client_ip()
-            }
-            verify_rs = requests.get(url, params=params, verify=True)
-            verify_rs = verify_rs.json()
-            response = {}
-            response["status"] = verify_rs.get("success", False)
-            if response['status']:
-                name = 'Full name: ' + form.get('name') + '\n'
-                category = 'Category: ' + form.get('category') + '\n'
-                subject = 'Subject: ' + form.get('subject') + '\n'
-                text = 'Text: ' + form.get('message') + '\n'
-                message = name + category + subject + text
-                sm('Feedback from ' + form.get('name'),
-                    message, 'test@mail.com',
-                    [ADMIN_EMAIL])
-                data = {'name': form.get('name'),
-                        'category': form.get('category'),
-                        'subject': form.get('subject'),
-                        'text': form.get('message')
-                        }
-                feedback = Feedback(**data)
-                feedback.save()
-            else:
-                response['message'] = verify_rs.get('error-codes', None)
-            return JsonResponse(response)
+    def form_valid(self, form):
+        send_mail('Feedback',
+                  'Message', 'test@mail.com',
+                  [ADMIN_EMAIL])
+        return super(MainPage, self).form_valid(form)

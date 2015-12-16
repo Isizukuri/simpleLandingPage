@@ -1,60 +1,27 @@
 {% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang=uk>
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-
     <!-- CSS -->
-    <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
-
+    <link rel="stylesheet" href="{% static " bootstrap/css/bootstrap.min.css " %}">
 </head>
-<body ng-app="LRLandingPage">
-<div class='container' ng-controller="LRContactFormController">
-    <h3>Contact us</h3>
-    {% verbatim %}
-    {{ status_message }}
-    {% endverbatim %}
-    <form name="lrContactForm" ng-submit="submit(feedback)" ng-hide='form_hide' novalidate>
-        {% csrf_token %}
-        <div class="form-group" ng-class="{'has-success': lrContactForm.name.$valid, 'has-error': lrContactForm.name.$invalid && lrContactForm.name.$touched}">
-            <label for="InputName">Full name</label>
-            <input type="text" class="form-control" id="InputName" placeholder="Full name" name='name' ng-model="feedback.name" required>
-            <span ng-show="lrContactForm.name.$invalid && lrContactForm.name.$touched" class="help-block">This field cannot be blank!</span>
-        </div>
-        <div class="form-group" ng-class="{'has-success': lrContactForm.category.$valid, 'has-error': lrContactForm.category.$invalid && lrContactForm.category.$touched}">
-            <label for="InputCategory">Category</label>
-            <input type="text" class="form-control" id="InputCategory" placeholder="Category" name='category' ng-model="feedback.category" required>
-            <span ng-show="lrContactForm.category.$invalid && lrContactForm.category.$touched" class="help-block">This field cannot be blank!</span>
-        </div>
-        <div class="form-group" ng-class="{'has-success': lrContactForm.subject.$valid, 'has-error': lrContactForm.subject.$invalid && lrContactForm.subject.$touched}">
-            <label for="InputSubject">Subject</label>
-            <input type="text" class="form-control" id="InputSubject" placeholder="Subject" name='subject' ng-model="feedback.subject" required>
-            <span ng-show="lrContactForm.subject.$invalid && lrContactForm.subject.$touched" class="help-block">This field cannot be blank!</span>
-        </div>
-        <div class="form-group" ng-class="{'has-success': lrContactForm.message.$valid, 'has-error': lrContactForm.message.$invalid && lrContactForm.message.$touched}">
-            <label for="InputMessage">Message</label>
-            <textarea class="form-control" id='InputMessage' rows="3" name='message' ng-model="feedback.message" required></textarea>
-            <span ng-show="lrContactForm.message.$invalid && lrContactForm.message.$touched" class="help-block">This field cannot be blank!</span>
-        </div>
-        <div vc-recaptcha key="'6Lek2xITAAAAAEywiCSzm6aCSuo6-yd21NJhj3km'"></div>
-        <button type="submit" class="btn btn-default" ng-disabled="lrContactForm.$invalid">Submit</button>
-    </form>
-</div>
-<!-- JS Inclusion -->
-<script src="{% static "jquery/jquery.min.js" %}"></script>
-<script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
-<script src="{% static "angular/angular.min.js" %}"></script>
-<script
-  src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit"
-  async defer
-></script>
-<script type="text/javascript" src="{% static "angular-recaptcha/angular-recaptcha.min.js" %}"></script>
 
-<!-- AngularJS App-->
-<script src="{% static "js/app.js" %}"></script>
+<body>
+    <div class='container'>
+        <h3>Contact us</h3>
+        <form action="/" method="post">
+            {% csrf_token %} {{ form.as_p }}
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
 
-<!-- AngularJS Controllers -->
-<script src="{% static "js/LRContactFormController.js" %}"></script>
+    <!-- JS Inclusion -->
+    <script src="{% static " jquery/jquery.min.js " %}"></script>
+    <script src="{% static " bootstrap/js/bootstrap.min.js " %}"></script>
+
 </body>
+
 </html>

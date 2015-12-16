@@ -17,10 +17,9 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from simpleapp.views import MainPage, SendMail
+from simpleapp.views import MainPage
 
 urlpatterns = [
-    url(r'^$', MainPage.as_view(), name='home'),
-    url(r'^api/feedback/', SendMail.as_view(), name='send_mail'),
+    url(r'^$', MainPage.as_view(success_url='/'), name='home'),
     url(r'^admin/', admin.site.urls),
 ]
