@@ -15,4 +15,5 @@ class MainPage(FormView):
         send_mail('Feedback',
                   'Message', 'test@mail.com',
                   [ADMIN_EMAIL])
+        form.save()
         return super(MainPage, self).form_valid(form)

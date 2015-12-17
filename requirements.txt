@@ -1,8 +1,2 @@
-Django==1.8.7
-argparse==1.2.1
-astroid==1.4.1
-lazy-object-proxy==1.2.1
-requests==2.8.1
-six==1.10.0
-wrapt==1.10.6
-wsgiref==0.1.2
+Django==1.9
+django-nocaptcha-recaptcha==0.0.18

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'nocaptcha_recaptcha',
     'simpleapp',
 ]
 
@@ -130,3 +131,8 @@ EMAIL_HOST_USER = 'ragnarok49@gmail.com'
 EMAIL_HOST_PASSWORD = 'Matushevska-1234'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
+# captcha settings
+
+NORECAPTCHA_SITE_KEY = '6Lek2xITAAAAAEywiCSzm6aCSuo6-yd21NJhj3km'
+NORECAPTCHA_SECRET_KEY = '6Lek2xITAAAAAEWo-jsppfNgdRFEzqIztP9EnHVd'
