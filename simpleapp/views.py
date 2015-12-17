@@ -12,8 +12,14 @@ class MainPage(FormView):
     form_class = FeedbackForm
 
     def form_valid(self, form):
-        send_mail('Feedback',
-                  'Message', 'test@mail.com',
+        name = 'Full name: ' + form.cleaned_data.get('name') + '\n'
+        category = 'Category: ' + form.cleaned_data.get('category') + '\n'
+        subject = 'Subject: ' + form.cleaned_data.get('subject') + '\n'
+        text = 'Text: ' + form.cleaned_data.get('text') + '\n'
+        message = name + category + subject + text
+        send_mail('Feedback from ' + form.cleaned_data.get('name'),
+                  message, 'test@mail.com',
                   [ADMIN_EMAIL])
+        print form.cleaned_data
         form.save()
         return super(MainPage, self).form_valid(form)
